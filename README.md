@@ -14,7 +14,7 @@ This project uses [Feathers](http://feathersjs.com). An open source web framewor
 
     * [npm](https://www.npmjs.com/) 
 
-    * [Docker](https://www.docker.com/) (for MySQL, you can use locally installed MySQL and alter step 3)
+    * [Docker](https://www.docker.com/) (for MySQL, you can use locally installed MySQL and alter step 4)
 
 2. Install your dependencies
 
