@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo ' > seed database'
+sequelize db:seed:all

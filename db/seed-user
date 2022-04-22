@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo ' > seed users'
+sequelize db:seed --seed 20210628161333-demo-user

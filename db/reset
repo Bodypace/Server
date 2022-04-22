@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo ' > drop database'
+sequelize db:drop
+
+echo ' > create database'
+sequelize db:create
+
+echo ' > migrate database'
+sequelize db:migrate

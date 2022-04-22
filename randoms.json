@@ -1,0 +1,13 @@
+
+{
+  "defaults": {
+    "INT": 10
+  },
+  "table": {
+    "Products": {
+      "name": ["yogurt", "orange", "bread", "ice cream", "beef", "water", "potatoes"],
+      "vendor": ["", "mlekovita", "Tasty", "git", "LC", "Evil corp", "AMG GT"],
+      "kcal": 100
+    }
+  }
+}

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+db/open-mysql $BP_MYSQL_DB -t "$@"

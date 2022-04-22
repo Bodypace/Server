@@ -1,0 +1,11 @@
+{
+  "port": "BP_PORT",
+  "authentication": {
+    "secret": "BP_AUTH_SECRET"
+  },
+  "mysql": {
+    "username": "BP_MYSQL_USERNAME",
+    "password": "BP_MYSQL_PASSWORD",
+    "host": "BP_MYSQL_HOST"
+  }
+}

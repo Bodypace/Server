@@ -1,0 +1,3 @@
+#!/bin/bash
+
+db/dump-all --no-create-info --ignore-table=$BP_MYSQL_DB._migrations "$@"
