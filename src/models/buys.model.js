@@ -11,6 +11,7 @@ module.exports = function (app) {
     amount: { type: DataTypes.INTEGER },
     amountUsed: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
     unitsUsed: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
+    finished: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
     price: { type: DataTypes.DECIMAL(6, 2) },
   }, {
     hooks: {

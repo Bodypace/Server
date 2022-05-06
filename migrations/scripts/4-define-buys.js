@@ -13,6 +13,7 @@ module.exports = {
       amount: { type: Sequelize.DataTypes.INTEGER, allowNull: true },
       amountUsed: { type: Sequelize.DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
       unitsUsed: { type: Sequelize.DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
+      finished: { type: Sequelize.DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
       price: { type: Sequelize.DataTypes.DECIMAL(6, 2), allowNull: true },
       createdAt: {
         type: Sequelize.DataTypes.DATE,
