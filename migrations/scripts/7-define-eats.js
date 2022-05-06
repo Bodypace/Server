@@ -10,6 +10,7 @@ module.exports = {
         autoIncrement: true
       },
       amount: { type: Sequelize.DataTypes.INTEGER, allowNull: false },
+      wasted: { type: Sequelize.DataTypes.DATEONLY },
       createdAt: {
         type: Sequelize.DataTypes.DATE,
         allowNull: false
@@ -20,7 +21,7 @@ module.exports = {
       },
       MealTimeId: {
         type: Sequelize.DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: { model: "MealTimes" }
       },
       ProductId: {

@@ -7,6 +7,7 @@ module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
   const Eat = sequelizeClient.define('Eat', {
     amount: { type: DataTypes.INTEGER, allowNull: false },
+    wasted: { type: DataTypes.DATEONLY },
   }, {
     hooks: {
       beforeCount(options) {
@@ -31,7 +32,7 @@ module.exports = function (app) {
     Buy.hasMany(Eat, { foreignKey: { allowNull: true } });
     Eat.belongsTo(Buy);
 
-    MealTime.hasMany(Eat, { foreignKey: { allowNull: false } });
+    MealTime.hasMany(Eat, { foreignKey: { allowNull: true } });
     Eat.belongsTo(MealTime);
 
     User.hasMany(Eat, { foreignKey: { allowNull: false } });
