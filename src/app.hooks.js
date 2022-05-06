@@ -2,16 +2,17 @@
 const { iff } = require('feathers-hooks-common');
 const { authenticate } = require('@feathersjs/authentication').hooks;
 const { authorize } = require('./hooks/authorize');
+const { fixQuerying } = require('./hooks/fix-querying')
 
 module.exports = {
   before: {
-    all: [ 
+    all: [
       iff(
         ({ path }) => path !== 'users' && path !== 'authentication',
         [authenticate('jwt'), authorize()]
       )
     ],
-    find: [],
+    find: [fixQuerying()],
     get: [],
     create: [],
     update: [],
