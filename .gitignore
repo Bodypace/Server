@@ -118,3 +118,4 @@ data/
 
 .env*
 !.env.project
+!.env.example
