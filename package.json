@@ -29,7 +29,8 @@
     "dev": "nodemon src/",
     "start": "node src/",
     "mocha": "mocha test/ --recursive --exit",
-    "smth": "echo '123'"
+    "db": "docker-compose -f db/.db.yml up -d",
+    "stop": "docker-compose -f db/.db.yml down"
   },
   "standard": {
     "env": [
