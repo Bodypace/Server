@@ -28,6 +28,7 @@
     "lint": "eslint src/. test/. --config .eslintrc.json --fix",
     "dev": "nodemon src/",
     "start": "node src/",
+    "repl": "node repl.js",
     "mocha": "mocha test/ --recursive --exit",
     "db": "docker-compose -f db/.db.yml up -d",
     "stop": "docker-compose -f db/.db.yml down"
