@@ -2,22 +2,17 @@
 
 Bodypace REST and Socket.IO server
 
-## How to use it
+## How to use it locally
 
+run below, then visit [Postman/bodypace](https://postman.com/bodypace) 
 ```bash
- # if you tweak those values update also .db.yml
- $ cp .env.example .env
-```
-
-```bash
- # make sure NodeJS, npm and Docker are installed
+ $ cp .env.example .env  # if you tweak those values update also .db.yml
  $ npm install
- $ npm run db     # later run `npm run stop` to stop MySQL
+ $ npm run db     # requires Docker, later run `npm run stop` to stop MySQL
  $ npm test       # optional
- $ npm start      # or `npm run dev` for instant refresh on code change
-```
 
-```bash
- # for interactive experimentation
- $ node repl.js
+ # start server (choose one)
+ $ npm run start  # normal run 
+ $ npm run dev    # instant refresh on code change
+ $ npm run repl   # interactive shell
 ```
