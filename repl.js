@@ -3,6 +3,7 @@
 
 var moment = require('moment')
 var lodash = require('lodash')
+var redis = require('redis')
 var repl = require("repl");
 
 // A "local" node repl with a custom prompt
@@ -15,6 +16,16 @@ const { Op, DataTypes } = require('sequelize');
 // Exposing stuff to the local REPL's context.
 local.context.moment = moment
 local.context.lodash = lodash
+local.context.redis = redis
+
+local.context.redisConnect = async () => {
+  const client = redis.createClient()
+
+  client.on('error', (err) => console.log('Redis Client Error', err));
+
+  await client.connect();
+  return client
+}
 
 local.context.app = app;
 local.context.sequelize = sequelize;

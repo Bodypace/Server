@@ -57,6 +57,7 @@
     "feathers-sequelize": "^6.2.0",
     "helmet": "^3.23.3",
     "mysql2": "^2.1.0",
+    "redis": "^4.1.0",
     "sequelize": "^6.3.4",
     "serve-favicon": "^2.5.0",
     "wait-port": "^0.2.9",
