@@ -21,6 +21,7 @@ const channels = require('./channels');
 const authentication = require('./authentication');
 
 const sequelize = require('./sequelize');
+const redis = require('./redis');
 
 const app = express(feathers());
 
@@ -44,6 +45,7 @@ app.configure(socketio({ // for mobile version
 }));
 
 app.configure(sequelize);
+app.configure(redis);
 
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware);

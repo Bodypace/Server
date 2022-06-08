@@ -10,8 +10,8 @@ module.exports = {
       // (which at least on first look looks fine)
       context.params.query = { ...context.params.query };
       return context;
-    }
+    };
 
   }
 
-}
+};

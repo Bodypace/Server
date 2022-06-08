@@ -2,8 +2,8 @@
 const { iff } = require('feathers-hooks-common');
 const { authenticate } = require('@feathersjs/authentication').hooks;
 const { authorize } = require('./hooks/authorize');
-const { fixQuerying } = require('./hooks/fix-querying')
-const { parseNull } = require('./hooks/parse-null')
+const { fixQuerying } = require('./hooks/fix-querying');
+const { parseNull } = require('./hooks/parse-null');
 
 module.exports = {
   before: {

@@ -14,8 +14,8 @@ function parseValue(val) {
     return parseArray(val);
   } else if (isObject(val)) {
     return parseObject(val);
-  } else if (typeof val === "string" && val.toUpperCase() === "NULL") {
-    return null
+  } else if (typeof val === 'string' && val.toUpperCase() === 'NULL') {
+    return null;
   } else {
     return val;
   }
@@ -44,10 +44,10 @@ module.exports = {
   parseNull: () => {
 
     return async context => {
-      context.params.query = parseObject(context.params.query)
+      context.params.query = parseObject(context.params.query);
       return context;
-    }
+    };
 
   }
 
-}
+};
