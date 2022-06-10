@@ -30,12 +30,17 @@
     "start": "node src/",
     "repl": "node repl.js",
     "mocha": "mocha test/ --recursive --exit",
-    "db": "docker-compose -f db/.db.yml up -d",
-    "db:cli": "mycli -u root -p root -h localhost -P 3306",
-    "db:stop": "docker-compose -f db/.db.yml down",
-    "redis": "docker run --name redis -d -p 6379:6379 redis",
-    "redis:cli": "docker exec -it redis redis-cli",
-    "redis:stop": "docker stop redis && docker rm redis"
+    "db": "npm run db:start",
+    "db:start": "npm run db:sql:start && npm run db:redis:start",
+    "db:stop": "npm run db:sql:stop && npm run db:redis:stop",
+    "db:sql": "npm run db:sql:start",
+    "db:sql:start": "docker-compose -f db/.db.yml up -d",
+    "db:sql:cli": "mycli -u root -p root -h localhost -P 3306",
+    "db:sql:stop": "docker-compose -f db/.db.yml down",
+    "db:redis": "npm run db:redis:start",
+    "db:redis:start": "docker run --name redis -d -p 6379:6379 redis",
+    "db:redis:cli": "docker exec -it redis redis-cli",
+    "db:redis:stop": "docker stop redis && docker rm redis"
   },
   "standard": {
     "env": [
