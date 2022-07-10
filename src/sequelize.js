@@ -1,10 +1,9 @@
 const Sequelize = require('sequelize');
 
-
 module.exports = function (app) {
   const settings = app.get('mysql');
-  const sequelize = new Sequelize(settings);
-  
+  const sequelize = new Sequelize({ ...settings, logging: false });
+
   const oldSetup = app.setup;
 
   app.set('sequelizeClient', sequelize);
@@ -14,14 +13,14 @@ module.exports = function (app) {
 
     // Set up data relationships
     const models = sequelize.models;
-    Object.keys(models).forEach(name => {
+    Object.keys(models).forEach((name) => {
       if ('associate' in models[name]) {
         models[name].associate(models);
       }
     });
 
     // Sync to the database
-    app.set('sequelizeSync', sequelize.sync({force: false}));
+    app.set('sequelizeSync', sequelize.sync({ force: false }));
 
     return result;
   };

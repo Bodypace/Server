@@ -4,8 +4,7 @@ const app = require('../src/app');
 
 const hostname = app.get('host') || 'localhost';
 const port = app.get('port') || 8998;
-const getUrl = (pathname = '') =>
-  `http://${hostname}:${port}/${pathname}`;
+const getUrl = (pathname = '') => `http://${hostname}:${port}/${pathname}`;
 
 describe('Feathers application tests', () => {
   let server;
@@ -30,8 +29,8 @@ describe('Feathers application tests', () => {
       try {
         await axios.get(getUrl('path/to/nowhere'), {
           headers: {
-            'Accept': 'text/html'
-          }
+            Accept: 'text/html',
+          },
         });
         assert.fail('should never get here');
       } catch (error) {
@@ -45,7 +44,7 @@ describe('Feathers application tests', () => {
     it('shows a 404 JSON error without stack trace', async () => {
       try {
         await axios.get(getUrl('path/to/nowhere'), {
-          json: true
+          json: true,
         });
         assert.fail('should never get here');
       } catch (error) {
