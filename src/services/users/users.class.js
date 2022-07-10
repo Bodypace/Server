@@ -1,5 +1,4 @@
 const { Service } = require('feathers-sequelize');
-const logger = require('../../logger');
 
 exports.Users = class Users extends Service {
   setup(app) {
@@ -7,14 +6,14 @@ exports.Users = class Users extends Service {
   }
 
   async create_code(email) {
-    logger.debug(`creating registration code for email: ${email}`);
+    const users = await this.app.service('users').find({ query: { email } });
+    if (users.total !== 0 || users.data.length !== 0) {
+      throw Error('email is already taken');
+    }
+
     const newCode = Math.random().toString().slice(2, 8);
     this.redis.set(email, newCode);
     this.redis.expire(email, 300);
-
-    logger.debug(
-      `sending registration code for email: ${email}, code: ${newCode}`
-    );
 
     return {
       status: 'email sent',
@@ -23,7 +22,6 @@ exports.Users = class Users extends Service {
 
   async create(data, params) {
     const { email, code } = data;
-    logger.debug(`creating new user: ${email}, code: ${code}`);
     this.redis = this.app.get('redisClient');
 
     if (code === undefined) {
