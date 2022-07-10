@@ -7,7 +7,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
       },
       name: { type: Sequelize.DataTypes.STRING(45), allowNull: false },
       vendor: { type: Sequelize.DataTypes.STRING(30), allowNull: true },
@@ -24,21 +24,21 @@ module.exports = {
       salt: { type: Sequelize.DataTypes.DECIMAL(4, 2), allowNull: true },
       createdAt: {
         type: Sequelize.DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
       },
       UserId: {
         type: Sequelize.DataTypes.INTEGER,
-        allowNull: false,
-        references: { model: "Users" }
-      }
-    })
+        allowNull: true,
+        references: { model: 'Users' },
+      },
+    });
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: (queryInterface) => {
     return queryInterface.dropTable('Products');
-  }
+  },
 };
