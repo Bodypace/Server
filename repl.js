@@ -53,7 +53,7 @@ local.context.services = {
   water: app.service('water'),
   products: app.service('products'),
   buys: app.service('buys'),
-  meal: app.service('meal'),
+  meals: app.service('meals'),
   mealtimes: app.service('mealtimes'),
   eats: app.service('eats'),
 };
