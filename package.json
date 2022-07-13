@@ -24,20 +24,17 @@
     "npm": ">= 3.0.0"
   },
   "scripts": {
-    "test": "npm run lint && npm run mocha",
-    "lint": "eslint src/. test/. --config .eslintrc.json --fix",
-    "dev": "npx nodemon src/",
     "start": "node src/",
+    "dev": "npx nodemon src/",
     "repl": "node repl.js",
-    "mocha": "mocha test/ --recursive --exit",
-    "db": "npm run db:start",
+    "test": "npm run test:lint && npm run test:mocha",
+    "test:lint": "eslint src/. test/. --config .eslintrc.json --fix",
+    "test:mocha": "mocha test/ --recursive --exit",
     "db:start": "npm run db:sql:start && npm run db:redis:start",
     "db:stop": "npm run db:sql:stop && npm run db:redis:stop",
-    "db:sql": "npm run db:sql:start",
     "db:sql:start": "docker-compose -f db/.db.yml up -d",
     "db:sql:cli": "mycli -u root -p root -h localhost -P 3306",
     "db:sql:stop": "docker-compose -f db/.db.yml down",
-    "db:redis": "npm run db:redis:start",
     "db:redis:start": "docker run --name redis -d -p 6379:6379 redis",
     "db:redis:cli": "docker exec -it redis redis-cli",
     "db:redis:stop": "docker stop redis && docker rm redis"
@@ -65,6 +62,7 @@
     "feathers-hooks-common": "^5.0.6",
     "feathers-sequelize": "^6.2.0",
     "helmet": "^3.23.3",
+    "moment": "^2.29.4",
     "mysql2": "^2.1.0",
     "redis": "^4.1.0",
     "sequelize": "^6.3.4",
@@ -77,7 +75,6 @@
     "eslint": "^7.7.0",
     "lodash": "^4.17.21",
     "mocha": "^8.1.1",
-    "moment": "^2.29.1",
     "nodemon": "^2.0.4",
     "sequelize-cli": "^6.2.0"
   }
