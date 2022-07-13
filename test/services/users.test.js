@@ -16,6 +16,14 @@ describe('users service', () => {
     };
 
     let redis = null;
+
+    after(async () => {
+      redis = app.get('redisClient');
+      const sequelize = app.get('sequelizeClient');
+      await sequelize.models.User.destroy({ where: {} });
+      await redis.flushAll();
+    });
+
     beforeEach(async () => {
       redis = app.get('redisClient');
       const sequelize = app.get('sequelizeClient');
@@ -83,6 +91,9 @@ describe('users service', () => {
       it('can register new user with correct code', async () => {
         const code = await redis.get(newUserInfo.email);
         const response = await users.create({ ...newUserInfo, code });
+        const matchingUsers = await users.find({
+          query: { email: newUserInfo.email },
+        });
 
         // TODO: assert confirmation code was removed from redis
         // TODO: check double registration is not working
@@ -90,7 +101,7 @@ describe('users service', () => {
         assert.equal(
           response.email,
           newUserInfo.email,
-          'new user email is correct'
+          'new user email is correct in response'
         );
         // TODO: figure out how feathres auth works cuz hashes change (but auth works?)
         // assert.equal(
@@ -98,7 +109,93 @@ describe('users service', () => {
         //   '$2a$10$2e7BNvx.CV/v.s/hifzIzujL2hgOExesX.PbsRjv0cWW.4NG8ew3K',
         //   'new user password is correct (and hashed)'
         // );
-        assert.equal(response.glassSize, 250, 'new user glassSize is correct');
+        assert.equal(
+          response.glassSize,
+          250,
+          'new user default glassSize is correct in response'
+        );
+
+        assert.equal(
+          matchingUsers.total,
+          1,
+          'there is one user with our email in total'
+        );
+        assert.equal(
+          matchingUsers.data.length,
+          1,
+          '1 user with our email was returned from database'
+        );
+
+        const matchingUser = matchingUsers.data[0];
+        assert.equal(
+          matchingUser.email,
+          newUserInfo.email,
+          'new user email is correct'
+        );
+        // TODO check password
+        assert.equal(
+          matchingUser.glassSize,
+          250,
+          'new user default glassSize is correct'
+        );
+
+        const allUsers = await users.find();
+        assert.equal(
+          allUsers.total,
+          1,
+          'no other user was added except for our'
+        );
+
+        const allMeals = await app.service('meals').find();
+        assert.equal(
+          allMeals.total,
+          5,
+          '5 new meals were added to database for our new user'
+        );
+        assert.equal(
+          allMeals.data.length,
+          5,
+          '5 new meals were returned from database'
+        );
+
+        assert.equal(allMeals.data[0].name, 'breakfast', 'breakfast was added');
+        assert.equal(
+          allMeals.data[0].defaultHour,
+          '06:30:00',
+          'breakfast default hour is correct'
+        );
+
+        assert.equal(
+          allMeals.data[1].name,
+          'breakfast 2',
+          'breakfast 2 was added'
+        );
+        assert.equal(
+          allMeals.data[1].defaultHour,
+          '10:00:00',
+          'breakfast 2 default hour is correct'
+        );
+
+        assert.equal(allMeals.data[2].name, 'lunch', 'lunch was added');
+        assert.equal(
+          allMeals.data[2].defaultHour,
+          '13:30:00',
+          'lunch default hour is correct'
+        );
+
+        assert.equal(allMeals.data[3].name, 'lunch 2', 'lunch 2 was added');
+        assert.equal(
+          allMeals.data[3].defaultHour,
+          '17:00:00',
+          'lunch 2 default hour is correct'
+        );
+
+        assert.equal(allMeals.data[4].name, 'dinner', 'dinner was added');
+        assert.equal(
+          allMeals.data[4].defaultHour,
+          '20:30:00',
+          'dinner default hour is correct'
+        );
       });
 
       it('cannot register user with incorrect code', (done) => {
@@ -121,11 +218,6 @@ describe('users service', () => {
         await users.create(newUserInfo);
         const code = await redis.get(newUserInfo.email);
         await users.create({ ...newUserInfo, code });
-      });
-
-      afterEach(async () => {
-        // remove user ?
-        // TODO: check logs if higher beforeEach triggers clear
       });
 
       // TODO: check for abuse and scanning users
