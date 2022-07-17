@@ -5,6 +5,7 @@ var moment = require('moment');
 var lodash = require('lodash');
 var redis = require('redis');
 var repl = require('repl');
+var axios = require('axios');
 
 // A "local" node repl with a custom prompt
 var local = repl.start(`server::${process.env.NODE_ENV}> `);
@@ -17,6 +18,7 @@ const { Op, DataTypes } = require('sequelize');
 local.context.moment = moment;
 local.context.lodash = lodash;
 local.context.redis = redis;
+local.context.axios = axios;
 
 local.context.redisConnect = async () => {
   const client = redis.createClient();
