@@ -17,18 +17,19 @@ describe('users service', () => {
 
     let redis = null;
 
-    after(async () => {
+    const reset_database = async () => {
       redis = app.get('redisClient');
       const sequelize = app.get('sequelizeClient');
       await sequelize.models.User.destroy({ where: {} });
       await redis.flushAll();
+    };
+
+    after(async () => {
+      await reset_database();
     });
 
     beforeEach(async () => {
-      redis = app.get('redisClient');
-      const sequelize = app.get('sequelizeClient');
-      await sequelize.models.User.destroy({ where: {} });
-      await redis.flushAll();
+      await reset_database();
     });
 
     it('sends confirmation code on create without code', async () => {

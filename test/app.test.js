@@ -2,8 +2,8 @@ const assert = require('assert').strict;
 const axios = require('axios');
 const app = require('../src/app');
 
-const hostname = app.get('host') || 'localhost';
-const port = app.get('port') || 8998;
+const hostname = 'localhost'; //app.get('host') || 'localhost';
+const port = 3031; //app.get('port') || 8998;
 const getUrl = (pathname = '') => `http://${hostname}:${port}/${pathname}`;
 
 describe('Feathers application tests', () => {
