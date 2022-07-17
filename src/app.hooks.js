@@ -9,16 +9,16 @@ module.exports = {
   before: {
     all: [
       iff(
-        ({ path }) => path !== 'users' && path !== 'authentication',
+        ({ path }) => !['users', 'authentication', 'products'].includes(path),
         [authenticate('jwt'), authorize()]
-      )
+      ),
     ],
     find: [fixQuerying(), parseNull()],
     get: [],
     create: [],
     update: [],
     patch: [],
-    remove: []
+    remove: [],
   },
 
   after: {
@@ -28,7 +28,7 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
+    remove: [],
   },
 
   error: {
@@ -38,6 +38,6 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
-  }
+    remove: [],
+  },
 };
